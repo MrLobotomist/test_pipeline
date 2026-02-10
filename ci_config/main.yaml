@@ -115,7 +115,8 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Run integration tests
-        run: pytest tests/ -m integration -v
+        run: |
+          pytest tests/ -m integration -v || [ $? -eq 5 ]
 
   notify:
     name: Notify on Failure
